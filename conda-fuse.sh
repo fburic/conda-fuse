@@ -81,15 +81,17 @@ function conda-fuse-unmount {
         local mount_point="${CONDA_FUSE_MOUNT_ROOT}/${env_name}"
         echo "[conda-fuse] Unmounting environment archive"
         fusermount -u "$mount_point"
-        rmdir "$mount_point"
 
         echo "[conda-fuse] Waiting for fuse-zip processes to finish. Please be patient."
+        printf "(waiting for zipping) "
         local cmd_str="fuse-zip ${CONDA_FUSE_ARCHIVE_PATH}/${env_name}.zip ${mount_point}"
         while pgrep -f "$cmd_str" > /dev/null
         do
             sleep 10
             printf "."
         done
+
+        rmdir "$mount_point"
         printf "\n[conda-fuse] DONE\n\n"
 
     else

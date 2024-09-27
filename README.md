@@ -137,6 +137,15 @@ For the example command above, the conda-fuse directories will look like this:
             └── x86_64-conda-linux-gnu
 ```
 
+#### :point_right: Tip: Save env changes
+
+When creating a large environment, or when installing many packages,
+before you start working with the env,
+it may be best to first save these changes by unmount it (see section below).
+This way it's a bit safer, and you won't have to wait for changes to be written back 
+at the end of your work session (maybe you'll be in a hurry then, 
+and a large env will take a while to compress).
+
 
 ### Activating an environment
 
@@ -184,9 +193,16 @@ The `env name` uniquely identifies a conda-fuse environment.
 Run `conda-fuse-env-list` to see the list of all conda-fuse envs
 (more details in the next section).
 
-This will take a little while and if watching in e.g. `htop`, 
-the CPU usage of `fuse-zip` processes will be evident.
-These processes must be left alone to finish, in order to properly write back
+You'll see the following in the terminal:
+
+```
+[conda-fuse] Waiting for fuse-zip processes to finish. Please be patient."
+(waiting for zipping) ...  
+```
+
+This will take a little while (the dots will keep accumulating). 
+If watching in e.g. `htop`, the CPU usage of the `fuse-zip` process will be evident.
+This processes must be left alone to finish, in order to properly write back
 any changes to the archive contents, which only occurs during unmounting.
 Interrupting this process may lead to lost data and/or archive corruption.
 While this is going on, `fuse-zip` writes to a temporary zip file in the same directory 
