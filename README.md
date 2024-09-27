@@ -178,6 +178,20 @@ Type "help", "copyright", "credits" or "license" for more information.
 >>>
 ```
 
+
+### Use in PyCharm
+
+This works basically the same as for normal conda environments, 
+assuming the conda-fuse env has been mounted. 
+Then, PyCharm is able to detect it when setting up the project interpreter 
+opting for an existing conda environment.
+
+You just need to remember to mount it again when you resume work on your project.
+To keep things simple, there's no separate mount-only command,
+so just run `conda-fuse-activate [env name]` in the PyCharm terminal 
+(or anywhere else, but in case you want to keep things centralized to the IDE).
+
+
 ### Unmounting an environment
 
 To avoid any weird behavior, first run `conda deactivate` if the environment in question
